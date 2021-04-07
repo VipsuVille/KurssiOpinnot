@@ -8,8 +8,17 @@ const Button = ({handleClick, text}) => (
 const Display = (prompt) => {
   return (
     <div>
+        <h1>{prompt.title}</h1>
         <p>{prompt.anecdotes} </p>
         <p>has {prompt.copy} votes</p>
+    </div>
+  )
+}
+const Display2 = (props) => {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <p>{props.anecdotes}</p>
     </div>
   )
 }
@@ -23,14 +32,17 @@ const App = () => {
       
       
   const [votes, setVotes] = useState([])
-
+  let highestvalue = Math.max(...votes)
+  let UseThisValue = votes.indexOf(highestvalue)
   const handleClickVote = () => {
     setVotes(previousVotes => {
         const copy = [...previousVotes];
         copy[selected] = (copy[selected] || 0) +1;
-        setVotes(copy);
-        console.log(copy)
-        console.log(votes)
+        setVotes(copy); 
+        return (
+          copy
+         
+        )
         })
   }
    const anecdotes = [
@@ -45,9 +57,11 @@ const App = () => {
 
       return (
         <div>
-        <Display anecdotes={anecdotes[selected]} copy={votes} />
+        <Display title="Värssy" anecdotes={anecdotes[selected]} copy={votes[selected]} />
         <Button handleClick={handleClickNext} text="Seuraaava värssy" />
         <Button handleClick={handleClickVote} text="Vote" />
+        <Display2 title="Most voted Värssy" anecdotes={anecdotes[UseThisValue]}/>
+        console.log({UseThisValue})
         </div>
       )
       
