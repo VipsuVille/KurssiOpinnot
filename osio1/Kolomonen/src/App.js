@@ -26,23 +26,29 @@ const App = () => {
   
   const handleClickNext = () => {
     setSelected(Math.floor(Math.random() * 6))
-  } 
+    return 
+    votes
+  }
 
   const [selected, setSelected] = useState(0)
-      
-      
+          
   const [votes, setVotes] = useState([])
-  let highestvalue = Math.max(...votes)
-  let UseThisValue = votes.indexOf(highestvalue)
+
+  const highestvalue = Math.max(...votes)
+  console.log("highestvalue", {highestvalue})
+  const UseThisValue = votes.indexOf(highestvalue)
+  console.log("UseThosValue", {UseThisValue})
   const handleClickVote = () => {
     setVotes(previousVotes => {
         const copy = [...previousVotes];
         copy[selected] = (copy[selected] || 0) +1;
+        console.log({UseThisValue})
         setVotes(copy); 
         return (
           copy
          
         )
+        console.log({UseThisValue})
         })
   }
    const anecdotes = [
