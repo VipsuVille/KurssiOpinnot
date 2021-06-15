@@ -1,5 +1,5 @@
 import React from 'react'
-
+/* Search if list contains input */
 const InputPersons = (props) => {
     return ( 
         <form onSubmit = {props.addNote}>

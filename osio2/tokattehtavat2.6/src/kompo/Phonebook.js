@@ -1,7 +1,7 @@
 import React from 'react'
 import Person from './persons'
-
-const Phonebook = ({persons, filter}) => {
+/*Prints person list to frontend*/
+const Phonebook = ({persons, filter, handleRemove}) => {
 const finder = !filter ? persons : persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 if (finder.length > 10) {
     return ( 
@@ -20,15 +20,17 @@ if (finder.length > 10) {
             <li>amount of population:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             {finder[0].population}</li>
             <h2>Languages</h2>
-            {finder[0].languages.map(note => <div key = {note.name}><ul><li>{note.name}</li></ul></div>)}
+            {/*{finder[0].languages.map(note => <div key = {note.name}><ul><li>{note.name}</li></ul></div>)}
+            */}<img src= {finder[0].flag} width= {300} height={300}></img>
         </ul>
+
         
     )
 }else 
 return (
-    console.log("huohhh", finder.length),
     <ul>
-        {finder.map(note => <Person person = {note} key = {note.id} name = {note.name} number = {note.number}/>)}
+        {finder.map(note => <Person person = {note} key = {note.id} 
+        name = {note.name} number = {note.number} handleRemove = {handleRemove()}/>)}
     </ul>
    
 )
