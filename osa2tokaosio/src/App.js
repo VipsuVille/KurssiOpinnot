@@ -47,13 +47,13 @@ const App = () => {
       event.preventDefault()
       const nameObject = {
         content: newName,
-        contentNUM: newNumber,
+        number: newNumber,
         date: new Date().toISOString(),
         important: Math.random() > 0.5,
         id: persons.length + 1,
       }
       
-      var check1 = persons.findIndex(tarkistus=> tarkistus.content === newName && tarkistus.contentNUM != newNumber)
+      var check1 = persons.findIndex(tarkistus=> tarkistus.content === newName && tarkistus.number != newNumber)
       var check = persons.findIndex(tarkistus=> tarkistus.content === newName)
       if (check1 !== -1) {
         if(window.confirm(`${nameObject.content} already on the list! Do you wanna change contact's number?`)) {
@@ -62,9 +62,9 @@ const App = () => {
           showPersons
   
   .update(found.id, nameObject)
-  .then(resp => {
-  
-    setPersons(persons.concat(resp))})
+  .then(res => {
+    setPersons(persons.map(p => p.id !== found.id ? p : res))
+})
   
   
         }
@@ -86,14 +86,24 @@ const App = () => {
       .then(returnedNote => {
         setPersons(persons.concat(returnedNote))
         setNewName('')
-        
-      })
-      setGoodMessage(
+        setGoodMessage(
         ` '${nameObject.content}' has been ADDED`
       )
       setTimeout(() => {
         setGoodMessage(null)
       }, 5000)
+      })
+    .catch(error => {
+      // pääset käsiksi palvelimen palauttamaan virheilmoitusolioon näin
+      setErrorMessage(error.response.data.error)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+      
+      console.log(error.response.data)
+    })
+   
+      
     
       }
   }

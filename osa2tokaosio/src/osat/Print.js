@@ -4,7 +4,7 @@ import Person from "./Person"
     return( 
     <ul>
           {namesFiltered.map(person=>
-            <Person key={person.content} name = {person.content} number = {person.contentNUM} handleRemove = {handleRemove} id = {person.id}/>
+            <Person key={person.content} name = {person.content} number = {person.number} handleRemove = {handleRemove} id = {person.id}/>
             
           )}
           

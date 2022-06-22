@@ -5,6 +5,5 @@ const Person = ({name,number,handleRemove, id}) => {
     )
     
   }
-  console.log("testi2");
 
   export default Person
